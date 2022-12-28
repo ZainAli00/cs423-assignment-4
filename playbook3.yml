@@ -1,0 +1,29 @@
+---
+
+ - name: Playbook no 3
+   hosts: databaseserver
+   tasks:
+
+   - name: Install Postgre SQL
+     apt:
+      name: postgresql
+      state: present
+     become: yes
+
+   - name: Start and Enable PostgreSQL service
+     service:
+      name: postgresql
+      state: started
+      enabled: yes
+     become: yes
+
+   - name: Install pgAdmin Client
+     apt:
+      name: pgadmin
+      state: present
+     become: yes
+
+   - name: Connect to database with pgAdmin
+     uri:
+      url: http://localhost/
+      return_content: yes
